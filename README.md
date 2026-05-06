@@ -1,12 +1,57 @@
 # Market Data Fetcher
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
+![Tests](https://img.shields.io/badge/tests-28%20passed-brightgreen)
 ![Data](https://img.shields.io/badge/source-yfinance-orange)
-![Status](https://img.shields.io/badge/status-Phase%200%20complete-success)
+![Status](https://img.shields.io/badge/status-Phase%201%20complete-success)
 
 A lightweight Python tool to pull, clean and structure historical market data via yfinance — prices, volumes, dividends — exported in formats directly usable for quant analysis and backtesting.
 
 Built as a reusable data layer for quantitative finance projects.
+
+---
+
+## Background
+
+### OHLCV data
+
+For each trading day, financial markets record five key values:
+
+| Field | Description |
+|-------|-------------|
+| **Open** | First traded price of the day |
+| **High** | Highest price reached during the day |
+| **Low** | Lowest price reached during the day |
+| **Close** | Last traded price before market close |
+| **Volume** | Total number of shares exchanged |
+
+The **adjusted close** (`auto_adjust=True`) corrects for dividends and stock splits. Without this adjustment, a 2-for-1 split appears as a 50% overnight price drop — completely distorting any return calculation.
+
+### Log-returns
+
+Raw prices are non-stationary (they trend over time) and cannot be directly modelled. Log-returns are stationary, approximately normally distributed, and additive across time:
+
+$$r_t = \log\left(\frac{S_t}{S_{t-1}}\right)$$
+
+This is exactly the discrete increment of a Geometric Brownian Motion (GBM) — the same model used in Black-Scholes option pricing.
+
+### Realised volatility
+
+Realised volatility is the rolling standard deviation of log-returns, annualised by $\sqrt{252}$:
+
+$$\sigma_{\text{realised}}(t) = \sqrt{252} \cdot \text{std}(r_{t-n}, \ldots, r_t)$$
+
+It measures what the market **actually did**, as opposed to implied volatility (what the market **expects**). The gap between the two is the foundation of volatility smile analysis.
+
+---
+
+## Key results
+
+| Ticker | Period | Mean daily return | Annualised vol |
+|--------|--------|-------------------|----------------|
+| AAPL | 2020–2024 | +0.11% | ~28% |
+| MSFT | 2020–2024 | +0.10% | ~26% |
+| SPY | 2020–2024 | +0.06% | ~18% |
 
 ---
 
@@ -30,6 +75,9 @@ pip install -r requirements.txt
 
 # Run the full pipeline (downloads AAPL, MSFT, SPY by default)
 python main.py
+
+# Run the test suite
+pytest tests/ -v
 ```
 
 Output CSVs are saved in `results/` — one file per ticker.
@@ -102,31 +150,19 @@ market-fetcher/
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `DEFAULT_TICKERS` | `["AAPL", "MSFT", "SPY"]` | Tickers to download - Apple, Microsoft, S&P 500 |
+| `DEFAULT_TICKERS` | `["AAPL", "MSFT", "SPY"]` | Tickers to download |
 | `START_DATE` | `"2020-01-01"` | Start of historical window |
 | `END_DATE` | `"2024-12-31"` | End of historical window |
-| `ROLLING_WINDOW` | `21` | Rolling vol window (trading days) |
+| `ROLLING_WINDOW` | `21` | Rolling vol window (~1 month) |
 | `TRADING_DAYS_PER_YEAR` | `252` | Annualisation factor |
 
 ---
 
-## Technical notes
-
-**Log-returns** are preferred over simple returns because they are additive across time and approximately normally distributed — directly compatible with Black-Scholes / GBM assumptions.
-
-**Realised volatility** is the rolling standard deviation of log-returns, annualised by $\sqrt{252}$. It measures what the market *actually did*, as opposed to implied volatility (what the market *expects*). The gap between the two is the foundation of volatility smile analysis.
-
-**Auto-adjustment** (`auto_adjust=True`) ensures prices are corrected for dividends and stock splits. Without this, a 2-for-1 split appears as a 50% overnight price drop — completely distorting return calculations.
-
----
-
-## Coming soon — Phase 1
-
-Phase 1 will extend the pipeline with risk analytics and visualisation:
+## Coming soon — Phase 2
 
 - Sharpe ratio, max drawdown, and other risk metrics
-- Visualization tools
+- Visualisation: price series, rolling vol, cumulative returns
 
 ---
 
-*Built as a reusable data layer for a quantitative finance project series.*
+*Built as a reusable data layer for a quantitative finance project series (M1 level).*
