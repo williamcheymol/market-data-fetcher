@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![Data](https://img.shields.io/badge/source-yfinance-orange)
+![Status](https://img.shields.io/badge/status-Phase%200%20complete-success)
 
 A lightweight Python tool to pull, clean and structure historical market data via yfinance — prices, volumes, dividends — exported in formats directly usable for quant analysis and backtesting.
 
@@ -119,10 +120,12 @@ market-fetcher/
 
 ---
 
-## Coming soon
+## Coming soon — Phase 1
+
+Phase 1 will extend the pipeline with risk analytics and visualisation:
 
 - Sharpe ratio, max drawdown, and other risk metrics
-- Visualization tools 
+- Visualization tools
 
 ---
 
