@@ -10,40 +10,6 @@ Built as a reusable data layer for quantitative finance projects.
 
 ---
 
-## Background
-
-### OHLCV data
-
-For each trading day, financial markets record five key values:
-
-| Field | Description |
-|-------|-------------|
-| **Open** | First traded price of the day |
-| **High** | Highest price reached during the day |
-| **Low** | Lowest price reached during the day |
-| **Close** | Last traded price before market close |
-| **Volume** | Total number of shares exchanged |
-
-The **adjusted close** (`auto_adjust=True`) corrects for dividends and stock splits. Without this adjustment, a 2-for-1 split appears as a 50% overnight price drop — completely distorting any return calculation.
-
-### Log-returns
-
-Raw prices are non-stationary (they trend over time) and cannot be directly modelled. Log-returns are stationary, approximately normally distributed, and additive across time:
-
-$$r_t = \log\left(\frac{S_t}{S_{t-1}}\right)$$
-
-This is exactly the discrete increment of a Geometric Brownian Motion (GBM) — the same model used in Black-Scholes option pricing.
-
-### Realised volatility
-
-Realised volatility is the rolling standard deviation of log-returns, annualised by $\sqrt{252}$:
-
-$$\sigma_{\text{realised}}(t) = \sqrt{252} \cdot \text{std}(r_{t-n}, \ldots, r_t)$$
-
-It measures what the market **actually did**, as opposed to implied volatility (what the market **expects**). The gap between the two is the foundation of volatility smile analysis.
-
----
-
 ## Key results
 
 | Ticker | Period | Mean daily return | Annualised vol |
@@ -157,10 +123,13 @@ market-fetcher/
 
 ---
 
-## Coming soon — Phase 2
+## Roadmap
 
+**Phase 1 ✓** — OHLCV download for any ticker via yfinance · Auto-adjustment for dividends & splits · Multi-ticker with graceful error handling · Cleaning pipeline (duplicates, invalid prices, NaN) · Log-returns, realised vol, cumulative returns · CSV export · 28 unit tests
+
+**Phase 2 — next:**
 - Sharpe ratio, max drawdown, and other risk metrics
-- Visualisation: price series, rolling vol, cumulative returns
+- Visualisation tools
 
 ---
 
