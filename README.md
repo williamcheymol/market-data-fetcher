@@ -164,4 +164,4 @@ market-fetcher/
 
 ---
 
-*Built as a reusable data layer for a quantitative finance project series (M1 level).*
+*Built as a reusable data layer for a quantitative finance project series.*
