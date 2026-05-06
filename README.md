@@ -1,7 +1,6 @@
 # Market Data Fetcher
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
-![Tests](https://img.shields.io/badge/tests-28%20passed-brightgreen)
 ![Data](https://img.shields.io/badge/source-yfinance-orange)
 ![Status](https://img.shields.io/badge/status-Phase%201%20complete-success)
 
