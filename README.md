@@ -10,16 +10,6 @@ Built as a reusable data layer for quantitative finance projects.
 
 ---
 
-## Key results
-
-| Ticker | Period | Mean daily return | Annualised vol |
-|--------|--------|-------------------|----------------|
-| AAPL | 2020–2024 | +0.11% | ~28% |
-| MSFT | 2020–2024 | +0.10% | ~26% |
-| SPY | 2020–2024 | +0.06% | ~18% |
-
----
-
 ## Features
 
 - Download OHLCV data for any ticker (stocks, ETFs, indices, crypto, forex)
