@@ -268,4 +268,4 @@ market-fetcher/
 
 ---
 
-*Built as a reusable data layer for a quantitative finance 
+*Built as a reusable data layer for a quantitative finance*
