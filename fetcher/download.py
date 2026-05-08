@@ -15,6 +15,10 @@
 import yfinance as yf
 import pandas as pd
 from typing import Union
+from curl_cffi import requests as cr
+
+# Shared session — same SSL workaround as fetcher/options.py
+_session = cr.Session(verify=False, impersonate="chrome")
 
 
 def download_single(ticker: str,
@@ -41,7 +45,8 @@ def download_single(ticker: str,
     ValueError if the ticker is invalid or no data is returned.
     """
     df = yf.download(ticker, start=start, end=end,
-                     auto_adjust=auto_adjust, progress=False)
+                     auto_adjust=auto_adjust, progress=False,
+                     session=_session)
 
     # yfinance returns an empty DataFrame for invalid tickers
     if df.empty:
@@ -85,7 +90,7 @@ def download_multiple(tickers: list,
     for ticker in tickers:
         try:
             results[ticker] = download_single(ticker, start, end, auto_adjust)
-            print(f"  ✓ {ticker} — {len(results[ticker])} rows")
+            print(f"  [OK] {ticker} — {len(results[ticker])} rows")
         except Exception as e:
-            print(f"  ✗ {ticker} — skipped ({e})")
+            print(f"  [!!] {ticker} — skipped ({e})")
     return results

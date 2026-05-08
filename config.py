@@ -28,3 +28,14 @@ TRADING_DAYS_PER_YEAR = 252
 # --- Export ---
 # Output directory for generated CSV files
 EXPORT_DIR = "results/"
+
+# --- Options ---
+# Ticker used for option chain fetching
+OPTION_TICKER = "AAPL"
+
+# Maximum number of expiry dates to fetch (nearest maturities first)
+MAX_MATURITIES = 4
+
+# Implied vol search bounds (Brent's method)
+IV_LOW  = 1e-4   # 0.01% — avoids division by zero
+IV_HIGH = 5.0    # 500%  — handles deep OTM options
