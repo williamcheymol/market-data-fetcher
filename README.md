@@ -92,7 +92,7 @@ Download, clean and compute features for historical equity data.
 </td>
 <td>
 
-![Price and Vol](results/plots/AAPL_price_vol.png)
+![Price and Vol](Graphiques/AAPL_price_vol.png)
 
 </td>
 </tr>
@@ -121,7 +121,7 @@ Fetch live option chains and extract implied volatility via Black-Scholes invers
 </td>
 <td>
 
-![IV Smile](results/plots/AAPL_iv_smile.png)
+![IV Smile](Graphiques/AAPL_iv_smile.png)
 
 </td>
 </tr>
@@ -146,7 +146,7 @@ The histogram peak is sharper and the tails are heavier than the fitted Gaussian
 </td>
 <td>
 
-![Return Distribution](results/plots/AAPL_return_dist.png)
+![Return Distribution](Graphiques/AAPL_return_dist.png)
 
 </td>
 </tr>
@@ -160,7 +160,7 @@ IV consistently exceeds realised vol — this spread is the **variance risk prem
 </td>
 <td>
 
-![IV vs Realized](results/plots/AAPL_iv_vs_realized.png)
+![IV vs Realized](Graphiques/AAPL_iv_vs_realized.png)
 
 </td>
 </tr>
