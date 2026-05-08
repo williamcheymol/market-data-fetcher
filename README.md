@@ -52,28 +52,6 @@ Extracted via **Brent's method** — a robust root-finding algorithm that always
 
 ---
 
-## Key results
-
-### Equity (2020–2024)
-
-| Ticker | Mean daily return | Annualised vol |
-|--------|-------------------|----------------|
-| AAPL | +0.11% | ~28% |
-| MSFT | +0.10% | ~26% |
-| SPY  | +0.06% | ~18% |
-
-### Options (AAPL, live)
-
-| | |
-|---|---|
-| Spot | $287.51 |
-| Risk-free rate (^IRX) | 3.60% |
-| Contracts fetched | 416 |
-| IV solved | 309 (74%) |
-| ATM implied vol | ~24% |
-
----
-
 ## Historical Data
 
 Download, clean and compute features for historical equity data.
@@ -108,6 +86,11 @@ Fetch live option chains and extract implied volatility via Black-Scholes invers
 
 <table>
 <tr>
+<td>
+
+![IV Smile](Graphiques/AAPL_iv_smile.png)
+
+</td>
 <td width="45%">
 
 **Pipeline**
@@ -119,11 +102,6 @@ Fetch live option chains and extract implied volatility via Black-Scholes invers
 **Output:** `results/{ticker}_options.csv`
 
 </td>
-<td>
-
-![IV Smile](Graphiques/AAPL_iv_smile.png)
-
-</td>
 </tr>
 </table>
 
@@ -131,9 +109,9 @@ The **volatility skew** is clearly visible — OTM puts (left) carry higher IV t
 
 ---
 
-## Visualisation
+## Other Visualisations
 
-Four plots generated automatically at the end of each pipeline run.
+Two additional plots generated automatically at the end of each pipeline run.
 
 <table>
 <tr>
@@ -151,16 +129,16 @@ The histogram peak is sharper and the tails are heavier than the fitted Gaussian
 </td>
 </tr>
 <tr>
+<td>
+
+![IV vs Realized](Graphiques/AAPL_iv_vs_realized.png)
+
+</td>
 <td width="45%">
 
 **ATM Implied Vol vs Realised Vol**
 
 IV consistently exceeds realised vol — this spread is the **variance risk premium**: the extra return option sellers demand for bearing volatility risk.
-
-</td>
-<td>
-
-![IV vs Realized](Graphiques/AAPL_iv_vs_realized.png)
 
 </td>
 </tr>
@@ -290,4 +268,4 @@ market-fetcher/
 
 ---
 
-*Built as a reusable data layer for a quantitative finance project series.*
+*Built as a reusable data layer for a quantitative finance 
